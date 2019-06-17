@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.sh.model">
+	<class name="Recipe" table="Recipe">
+		<id name="recipeId" column="recipeId" type="java.lang.Integer">
+		</id>
+		
+		<property name="recipeName" column="recipeName"
+			type="java.lang.String" length="20" not-null="true"/>
+			
+		<property name="recipePicture" column="recipePicture"
+			type="java.lang.String" length="100" not-null="true"/>
+			
+		<property name="introduction" column="introduction"
+			type="java.lang.String" length="500"/>
+			
+		<property name="tasteId" column="tasteId"
+			type="java.lang.Integer" not-null="true"/>
+			
+		<property name="craftId" column="craftId"
+			type="java.lang.Integer" not-null="true"/>
+			
+		<property name="costTimeId" column="costTimeId"
+			type="java.lang.Integer" not-null="true"/>
+			
+		<property name="difficultyId" column="difficultyId"
+			type="java.lang.Integer" not-null="true"/>
+			
+		<property name="categoryId" column="categoryId"
+			type="java.lang.Integer" not-null="true"/>
+			
+		<property name="cuisineId" column="cuisineId"
+			type="java.lang.Integer" not-null="true"/>
+			
+		<property name="materialId" column="materialId"
+			type="java.lang.Integer" not-null="true"/>
+	</class>
+</hibernate-mapping>

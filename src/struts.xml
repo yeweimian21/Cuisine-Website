@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN" "struts-2.1.7.dtd" >
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<constant name="struts.objectFactory" value="spring"/>
+	
+	<package name="default" namespace="/" extends="json-default,struts-default">
+		<!-- index.html -->
+		<action name="getRecommendationRecipe" class="indexAction" method="getRecommendationRecipe">
+		</action>
+		<action name="getLatestRecipe" class="indexAction" method="getLatestRecipe">
+		</action>
+		<action name="getHottestRecipe" class="indexAction" method="getHottestRecipe">
+		</action>
+		
+		<action name="getRecipeNav" class="recipeAction" method="getRecipeNav">
+		</action>
+		
+		<action name="getMaterialCategory" class="materialCategoryAction" method="getMaterialCategory">
+		</action>
+		
+		<action name="gettasteRecipe" class="recipeAction" method="getRecipeListByTaste"></action>
+		<action name="getcraftRecipe" class="recipeAction" method="getRecipeListByCraft"></action>
+		<action name="getcostTimeRecipe" class="recipeAction" method="getRecipeListByCostTime"></action>
+		<action name="getdifficultyRecipe" class="recipeAction" method="getRecipeListByDifficulty"></action>
+		<action name="getcategoryRecipe" class="recipeAction" method="getRecipeListByCategory"></action>
+		<action name="getcuisineRecipe" class="recipeAction" method="getRecipeListByCuisine"></action>
+		
+		<action name="getRecipeList" class="recipeAction" method="getRecipeList">
+		</action>
+		
+		<action name="getRecipeDetail" class="recipeAction" method="getRecipeDetail">
+		</action>
+		
+		<action name="getMaterialRecipe" class="recipeAction" method="getRecipeListByMaterial">
+		</action>
+		
+		<action name="login" class="userAction" method="login">
+			<result name="success" type="redirect">/FoodWeb/html/index.html?state=0</result>
+			<result name="error" type="redirect">/FoodWeb/html/Login.html?state=1</result>
+		</action>
+		
+		<action name="register" class="userAction" method="register">
+			<result name="success" type="redirect">/FoodWeb/html/Login.html?state=2</result>
+		</action>
+		
+		<action name="getUser" class="userAction" method="getUser">
+		</action>
+		
+		<action name="getChatList" class="chatAction" method="getChatList">
+		</action>
+		
+		<action name="updateUser" class="userAction" method="updateUser">
+			<result name="success" type="redirect">/FoodWeb/html/index.html?state=2</result>
+		</action>
+		
+		<action name="logout" class="userAction" method="logout">
+			<result name="success" type="redirect">/FoodWeb/html/index.html?state=3</result>
+		</action>
+		
+		<action name="addChat" class="chatAction" method="addChat">
+			<result name="success" type="redirect">/FoodWeb/html/Chat.html</result>
+		</action>
+		
+		<action name="searchRecipe" class="recipeAction" method="searchRecipe">
+			<result name="success" type="redirect">/FoodWeb/html/SearchRecipe.html</result>
+		</action>
+		
+		<action name="getSearchRecipe" class="recipeAction" method="getSearchRecipe">
+		</action>
+		
+		<action name="addMaterialCategory" class="materialCategoryAction" 
+			method="addMaterialCategory">
+			<result name="success" type="redirect">/Management/html/MaterialCategoryAdd.html?state=1</result>
+		</action>
+		<action name="updateMaterialCategory" class="materialCategoryAction" 
+			method="updateMaterialCategory">
+			<result name="success" type="redirect">/Management/html/MaterialCategoryAdd.html?state=1</result>
+		</action>
+		<action name="deleteMaterialCategory" class="materialCategoryAction" 
+			method="deleteMaterialCategory">
+			<result name="success" type="redirect">/Management/html/MaterialCategoryAdd.html?state=1</result>
+		</action>
+		<action name="getMaterialCategoryAll" class="materialCategoryAction" 
+			method="getMaterialCategoryAll">
+			<result name="success" type="redirect">/Management/html/MaterialCategoryAdd.html?state=1</result>
+		</action>
+		
+		<action name="addMaterial" class="materialAction" 
+			method="addMaterial">
+			<result name="success" type="redirect">/Management/html/MaterialAdd.html?state=1</result>
+		</action>
+		<action name="check" class="userAction" method="check">
+			<result name="error" type="redirect">/FoodWeb/html/Login.html?state=0</result>
+			<result name="success" type="redirect">/FoodWeb/html/InputChat.html</result>
+		</action>
+	</package>
+</struts>

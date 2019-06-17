@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.sh.model">
+	<class name="CookIngredient" table="CookIngredient">
+		
+		<composite-id>
+			<key-property name="recipeId" column="recipeId" type="java.lang.Integer"/>
+			<key-property name="ingredientName" column="ingredientName" type="java.lang.String" length="20"/>
+		</composite-id>
+			
+		<property name="ingredientAmount" column="ingredientAmount"
+			type="java.lang.String" length="20" not-null="true"/>
+		
+	</class>
+</hibernate-mapping>

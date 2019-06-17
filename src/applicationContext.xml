@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<!-- 数据源 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:ORCL"></property>
+		<property name="username" value="system"></property>
+		<property name="password" value="oracle"></property>
+	</bean>
+
+	<!-- 会话配置 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<!-- 向Hibernate注册映射文件(全部)，项目应用实体对象 -->
+				<value>com/sh/model/Category.hbm.xml</value>
+				<value>com/sh/model/CookIngredient.hbm.xml</value>
+				<value>com/sh/model/CookMethod.hbm.xml</value>
+				<value>com/sh/model/CookTechnique.hbm.xml</value>
+				<value>com/sh/model/CostTime.hbm.xml</value>
+				<value>com/sh/model/Craft.hbm.xml</value>
+				<value>com/sh/model/Cuisine.hbm.xml</value>
+				<value>com/sh/model/Difficulty.hbm.xml</value>
+				<value>com/sh/model/Hottest.hbm.xml</value>
+				<value>com/sh/model/Latest.hbm.xml</value>
+				<value>com/sh/model/Material.hbm.xml</value>
+				<value>com/sh/model/MaterialCategory.hbm.xml</value>
+				<value>com/sh/model/Recipe.hbm.xml</value>
+				<value>com/sh/model/Recommendation.hbm.xml</value>
+				<value>com/sh/model/Taste.hbm.xml</value>
+				<value>com/sh/model/User.hbm.xml</value>
+				<value>com/sh/model/Chat.hbm.xml</value>
+				<value>com/sh/model/ChatPicture.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置谁可以使用事务 -->
+	<!-- 配置哪些方法需要事务管理 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="login*" read-only="true" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 配置哪些类需要事务管理 -->
+	<aop:config>
+		<aop:pointcut id="allServiceMethod" expression="execution(* com.sh.biz.*.*(..))"/>
+		<aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice" />
+	</aop:config>
+	
+	<!-- Spring -->
+	<bean id="recipeDao" class="com.sh.dao.impl.RecipeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="recipeBiz" class="com.sh.biz.impl.RecipeBizImpl">
+		<property name="recipeDao" ref="recipeDao"></property>
+		<property name="tasteBiz" ref="tasteBiz"></property>
+		<property name="craftBiz" ref="craftBiz"></property>
+		<property name="costTimeBiz" ref="costTimeBiz"></property>
+		<property name="difficultyBiz" ref="difficultyBiz"></property>
+		<property name="categoryBiz" ref="categoryBiz"></property>
+		<property name="cuisineBiz" ref="cuisineBiz"></property>
+		<property name="cookIngredientBiz" ref="cookIngredientBiz"></property>
+		<property name="cookMethodBiz" ref="cookMethodBiz"></property>
+		<property name="cookTechniqueBiz" ref="cookTechniqueBiz"></property>
+	</bean>
+	
+	<bean id="recommendationDao" class="com.sh.dao.impl.RecommendationDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="recommendationBiz" class="com.sh.biz.impl.RecommendationBizImpl">
+		<property name="recommendationDao" ref="recommendationDao"></property>
+		<property name="recipeDao" ref="recipeDao"></property>
+	</bean>
+	
+	<bean id="latestDao" class="com.sh.dao.impl.LatestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="latestBiz" class="com.sh.biz.impl.LatestBizimpl">
+		<property name="latestDao" ref="latestDao"></property>
+		<property name="recipeDao" ref="recipeDao"></property>
+	</bean>
+	
+	<bean id="hottestDao" class="com.sh.dao.impl.HottestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="hottestBiz" class="com.sh.biz.impl.HottestBizImpl">
+		<property name="hottestDao" ref="hottestDao"></property>
+		<property name="recipeDao" ref="recipeDao"></property>
+	</bean>
+	
+	<bean id="indexAction" class="com.sh.action.IndexAction">
+		<property name="recommendationBiz" ref="recommendationBiz"></property>
+		<property name="latestBiz" ref="latestBiz"></property>
+		<property name="hottestBiz" ref="hottestBiz"></property>
+	</bean>
+	
+	<bean id="tasteDao" class="com.sh.dao.impl.TasteDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="tasteBiz" class="com.sh.biz.impl.TasteBizImpl">
+		<property name="tasteDao" ref="tasteDao"></property>
+	</bean>
+	
+	<bean id="craftDao" class="com.sh.dao.impl.CraftDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="craftBiz" class="com.sh.biz.impl.CraftBizImpl">
+		<property name="craftDao" ref="craftDao"></property>
+	</bean>
+	
+	<bean id="costTimeDao" class="com.sh.dao.impl.CostTimeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="costTimeBiz" class="com.sh.biz.impl.CostTimeBizImpl">
+		<property name="costTimeDao" ref="costTimeDao"></property>
+	</bean>
+	
+	<bean id="difficultyDao" class="com.sh.dao.impl.DifficultyDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="difficultyBiz" class="com.sh.biz.impl.DifficultyBizImpl">
+		<property name="difficultyDao" ref="difficultyDao"></property>
+	</bean>
+	
+	<bean id="categoryDao" class="com.sh.dao.impl.CategoryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="categoryBiz" class="com.sh.biz.impl.CategoryBizImpl">
+		<property name="categoryDao" ref="categoryDao"></property>
+	</bean>
+	
+	<bean id="cuisineDao" class="com.sh.dao.impl.CuisineDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="cuisineBiz" class="com.sh.biz.impl.CuisineBizImpl">
+		<property name="cuisineDao" ref="cuisineDao"></property>
+	</bean>
+	
+	<bean id="recipeAction" class="com.sh.action.RecipeAction">
+		<property name="recipeBiz" ref="recipeBiz"></property>
+	</bean>
+	
+	<bean id="materialDao" class="com.sh.dao.impl.MaterialDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="materialBiz" class="com.sh.biz.impl.MaterialBizImpl">
+		<property name="materialDao" ref="materialDao"></property>
+	</bean>
+	<bean id="materialAction" class="com.sh.action.MaterialAction">
+		<property name="materialBiz" ref="materialBiz"></property>
+	</bean>
+	
+	<bean id="materialCategoryDao" class="com.sh.dao.impl.MaterialCategoryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="materialCategoryBiz" class="com.sh.biz.impl.MaterialCategoryBizImpl">
+		<property name="materialCategoryDao" ref="materialCategoryDao"></property>
+		<property name="materialDao" ref="materialDao"></property>
+	</bean>
+	
+	<bean id="materialCategoryAction" class="com.sh.action.MaterialCategoryAction">
+		<property name="materialCategoryBiz" ref="materialCategoryBiz"></property>
+	</bean>
+	
+	<bean id="userDao" class="com.sh.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="userBiz" class="com.sh.biz.impl.UserBizImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	
+	<bean id="userAction" class="com.sh.action.UserAction">
+		<property name="userBiz" ref="userBiz"></property>
+	</bean>
+	
+	<bean id="chatPictureDao" class="com.sh.dao.impl.ChatPictureDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="chatPictureBiz" class="com.sh.biz.impl.ChatPictureBizImpl">
+		<property name="chatPictureDao" ref="chatPictureDao"></property>
+	</bean>
+	
+	<bean id="chatDao" class="com.sh.dao.impl.ChatDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="chatBiz" class="com.sh.biz.impl.ChatBizImpl">
+		<property name="chatDao" ref="chatDao"></property>
+		<property name="userDao" ref="userDao"></property>
+		<property name="chatPictureDao" ref="chatPictureDao"></property>
+	</bean>
+	<bean id="chatAction" class="com.sh.action.ChatAction">
+		<property name="chatBiz" ref="chatBiz"></property>
+		<property name="chatPictureBiz" ref="chatPictureBiz"></property>
+	</bean>
+	
+	<bean id="cookIngredientDao" class="com.sh.dao.impl.CookIngredientDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="cookIngredientBiz" class="com.sh.biz.impl.CookIngredientBizImpl">
+		<property name="cookIngredientDao" ref="cookIngredientDao"></property>
+	</bean>
+	<bean id="cookIngredientAction" class="com.sh.action.CookIngredientlAction">
+		<property name="cookIngredientBiz" ref="cookIngredientBiz"></property>
+	</bean>
+	<bean id="cookMethodDao" class="com.sh.dao.impl.CookMethodDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="cookMethodBiz" class="com.sh.biz.impl.CookMethodBizImpl">
+		<property name="cookMethodDao" ref="cookMethodDao"></property>
+	</bean>
+	<bean id="cookMethodAction" class="com.sh.action.CookMethodAction">
+		<property name="cookMethodBiz" ref="cookMethodBiz"></property>
+	</bean>
+	<bean id="cookTechniqueDao" class="com.sh.dao.impl.CookTechniqueDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="cookTechniqueBiz" class="com.sh.biz.impl.CookTechniqueBizImpl">
+		<property name="cookTechniqueDao" ref="cookTechniqueDao"></property>
+	</bean>
+	<bean id="cookTechniqueAction" class="com.sh.action.CookTechniqueAction">
+		<property name="cookTechniqueBiz" ref="cookTechniqueBiz"></property>
+	</bean>
+</beans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.sh.model">
+	<class name="Administrator" table="t_admin">
+		<id name="userId" column="userId" type="java.lang.Integer">
+		</id>
+		
+		<property name="userName" column="userName" 
+			type="java.lang.String" length="20" not-null="true"/>
+		
+		<property name="password" column="password" 
+			type="java.lang.String" length="30" not-null="true"/>
+	</class>
+</hibernate-mapping>

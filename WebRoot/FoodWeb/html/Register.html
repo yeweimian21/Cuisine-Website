@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css"
+			rel="stylesheet">
+		<link href="../bootstrap-3.3.7/dist/css/bootstrap-theme.min.css"
+			rel="stylesheet">
+		<link href="../css/NoneUnderline.css" rel="stylesheet">
+		<link href="../css/Tip.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<div class="container">
+			<!-- logo -->
+			<div class="page-header">
+				<h1 style="text-align: center;">
+					<img alt="" src="../img/logo/logo3.jpg">
+					<img alt="" src="../img/logo/logo4.jpg">
+					<p style="text-align: right;margin-top: 20px;">
+						<span style="margin-right: 800px;">Food</span>
+						<a id="title1" href="Login.html">
+							<button type="button" class="btn">
+								登录
+							</button> </a>
+						<a id="title2" href="Register.html">
+							<button type="button" class="btn">
+								注册
+							</button> </a>
+					</p>
+				</h1>
+				
+				
+			</div>
+			<!-- 导航条 -->
+			<div>
+				<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li class="active">
+								<a href="index.html">首页</a>
+							</li>
+							<li>
+								<a href="Recipe.html">菜谱</a>
+							</li>
+							<li>
+								<a href="MaterialCategory.html">食材</a>
+							</li>
+							<li>
+								<a href="Chat.html">社区</a>
+							</li>
+						</ul>
+						
+						<form action="searchRecipe" class="navbar-form navbar-right">
+							<div class="form-group">
+								<input type="text" name="recipeName" class="form-control"
+									placeholder="菜谱名称">
+							</div>
+
+							<button type="submit" class="btn btn-default">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+								搜索
+							</button>
+						</form>
+					</div>
+				</div>
+				</nav>
+			</div>
+			<!-- 页头标题 -->
+			<div class="page-header">
+				<h1>
+					用户注册
+				</h1>
+			</div>
+			<!-- 注册表单 -->
+			<div id="login">
+				<form class="form-horizontal" action="register">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">
+							用户名
+						</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="name"
+								placeholder="userName" name="userName">
+							<span class="tip" id="nameTip"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">
+							密码
+						</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="password"
+								placeholder="Password" name="password">
+							<span class="tip" id="passwordTip"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputgender" class="col-sm-2 control-label">
+							性别
+						</label>
+						<div class="col-sm-10">
+							<label class="radio-inline">
+								<input type="radio" name="gender" id="inlineRadio1"
+									value="0" checked="checked">
+								男
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="gender" id="inlineRadio2"
+									value="1">
+								女
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputage" class="col-sm-2 control-label">
+							年龄
+						</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="age"
+								placeholder="age" name="age">
+							<span class="tip" id="ageTip"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputaddress" class="col-sm-2 control-label">
+							地址
+						</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="address"
+								placeholder="address" name="address">
+							<span class="tip" id="addressTip"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputtel" class="col-sm-2 control-label">
+							电话
+						</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="phone"
+								placeholder="phone" name="phone">
+							<span class="tip" id="phoneTip"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">
+							电子邮箱
+						</label>
+						<div class="col-sm-10">
+							<input type="email" class="form-control" id="email"
+								placeholder="email" name="email">
+							<span class="tip" id="emailTip"></span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default">
+								提交
+							</button>
+							<button type="reset" class="btn btn-default">
+								重置
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<script src="../bootstrap-3.3.7/dist/js/jquery-2.1.1.min.js"></script>
+		<script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+		<script src="../JavaScript/InputCheck.js" type="text/javascript"></script>
+	</body>
+</html>

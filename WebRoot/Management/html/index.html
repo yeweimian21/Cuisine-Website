@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../../FoodWeb/bootstrap-3.3.7/dist/css/bootstrap.min.css"
+			rel="stylesheet">
+		<link href="../../FoodWeb/bootstrap-3.3.7/dist/css/bootstrap-theme.min.css"
+			rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+			<!-- logo -->
+			<div class="page-header">
+				<h1 style="text-align: center;">
+					美食网站后台管理
+				</h1>
+
+			</div>
+			<!-- 导航条 -->
+			<div>
+				<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"
+									role="button" aria-haspopup="true" aria-expanded="false">菜谱管理
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#" target="managePage">添加菜谱</a>
+									</li>
+									<li>
+										<a href="#" target="managePage">编辑菜谱</a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"
+									role="button" aria-haspopup="true" aria-expanded="false">食材管理
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="MaterialCategoryAdd.html" target="managePage">食材种类</a>
+									</li>
+									<li>
+										<a href="#" target="managePage">食材</a>
+									</li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"
+									role="button" aria-haspopup="true" aria-expanded="false">用户管理
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#" target="managePage">编辑帖子</a>
+									</li>
+									<li>
+										<a href="#" target="managePage">编辑用户信息</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+				</nav>
+			</div>
+			<iframe src="RecipeInput.html" name="managePage" width="100%" height="450px;">
+			</iframe>
+			
+		</div>
+		<script src="../../FoodWeb/bootstrap-3.3.7/dist/js/jquery-2.1.1.min.js"></script>
+		<script src="../../FoodWeb/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+	</body>
+</html>

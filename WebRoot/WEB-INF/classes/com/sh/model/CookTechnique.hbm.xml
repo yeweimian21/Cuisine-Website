@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.sh.model">
+	<class name="CookTechnique" table="CookTechnique">
+		<composite-id>
+			<key-property name="recipeId" column="recipeId" type="java.lang.Integer"/>
+			<key-property name="techniqueId" column="techniqueId" type="java.lang.Integer"/>
+		</composite-id>
+			
+		<property name="techniqueContent" column="techniqueContent"
+			type="java.lang.String" length="200" not-null="true"/>
+	</class>
+</hibernate-mapping>

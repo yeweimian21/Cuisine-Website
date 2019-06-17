@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.sh.model">
+	<class name="Category" table="t_Category">
+		<id name="categoryId" column="categoryId" type="java.lang.Integer">
+			<generator class="sequence">
+				<param name="sequence">categoryIdSequence</param>
+			</generator>
+		</id>
+		
+		<property name="categoryName" column="categoryName" 
+			type="java.lang.String" length="20" not-null="true"/>
+	</class>
+</hibernate-mapping>
